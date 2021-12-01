@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:theme_patrol/theme_patrol.dart';
+import 'package:theme_patrol2/theme_patrol2.dart';
 import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 
 void main() {
@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // This widget is the root of your applicasetThemetion.
   @override
   Widget build(BuildContext context) {
     return ThemePatrol(
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      mode: ThemeMode.system,
+      mode: ThemeMode.light,
       builder: (context, theme) {
         return MaterialApp(
           title: 'Flutter Demo',
@@ -45,7 +45,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

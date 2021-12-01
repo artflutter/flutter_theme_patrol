@@ -1,11 +1,11 @@
-name: theme_patrol
+name: theme_patrol2
 description: Keep an eyes on your app theme changes.
 version: 0.0.1
-homepage: https://github.com/davigmacode/flutter_theme_patrol.git
+homepage: https://github.com/artflutter/flutter_theme_patrol.git
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
+  sdk: ">=2.13.0 <3.0.0"
+  flutter: ">=2.5.1"
 
 dependencies:
   flutter:

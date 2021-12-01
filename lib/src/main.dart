@@ -5,7 +5,6 @@ import 'dart:math';
 ///
 /// Contains light and dark theme data, and the theme mode
 class ThemePatrolData {
-
   /// Default constructor
   const ThemePatrolData({
     this.light,
@@ -14,10 +13,10 @@ class ThemePatrolData {
   });
 
   /// The default light theme data
-  final ThemeData light;
+  final ThemeData? light;
 
   /// The default dark theme data
-  final ThemeData dark;
+  final ThemeData? dark;
 
   /// The default theme mode
   ///
@@ -27,9 +26,9 @@ class ThemePatrolData {
   /// Creates a copy of this [ThemePatrolData] but with
   /// the given fields replaced with the new values.
   ThemePatrolData copyWith({
-    ThemeData light,
-    ThemeData dark,
-    ThemeMode mode,
+    ThemeData? light,
+    ThemeData? dark,
+    ThemeMode? mode,
   }) {
     return ThemePatrolData(
       light: light ?? this.light,
@@ -40,7 +39,7 @@ class ThemePatrolData {
 
   /// Returns a new [ThemePatrolData] that is
   /// a combination of this object and the given [other] style.
-  ThemePatrolData merge(ThemePatrolData other) {
+  ThemePatrolData merge(ThemePatrolData? other) {
     // if null return current object
     if (other == null) return this;
 
@@ -53,38 +52,34 @@ class ThemePatrolData {
 }
 
 /// The widget builder to
-typedef ThemePatrolBuilder = Widget Function(BuildContext context, ThemePatrolData theme);
+typedef ThemePatrolBuilder = Widget Function(
+    BuildContext context, ThemePatrolData? theme);
 
 /// A Widget that help you to keep an eyes on your app theme changes
 class ThemePatrol extends StatefulWidget {
-
   /// Internal constructor
   ThemePatrol._({
-    Key key,
-    @required this.builder,
-    @required this.theme,
-  }) :
-    assert(builder != null),
-    assert(theme != null),
-    super(key: key);
+    Key? key,
+    required this.builder,
+    required this.theme,
+  }) : super(key: key);
 
   /// Default constructor
   factory ThemePatrol({
-    Key key,
-    ThemePatrolBuilder builder,
-    ThemePatrolData theme,
-    ThemeData light,
-    ThemeData dark,
-    ThemeMode mode,
+    Key? key,
+    required ThemePatrolBuilder builder,
+    ThemePatrolData? theme,
+    ThemeData? light,
+    ThemeData? dark,
+    ThemeMode? mode,
   }) {
     return ThemePatrol._(
-      builder: builder,
-      theme: ThemePatrolData().merge(theme).copyWith(
-        light: light,
-        dark: dark,
-        mode: mode,
-      )
-    );
+        builder: builder,
+        theme: ThemePatrolData().merge(theme).copyWith(
+              light: light,
+              dark: dark,
+              mode: mode,
+            ));
   }
 
   /// Builder that gets called when the brightness or theme changes
@@ -96,8 +91,8 @@ class ThemePatrol extends StatefulWidget {
   @override
   ThemePatrolState createState() => ThemePatrolState();
 
-  static ThemePatrolState of(BuildContext context) {
-    return context.findAncestorStateOfType<State<ThemePatrol>>();
+  static ThemePatrolState? of(BuildContext context) {
+    return context.findAncestorStateOfType<ThemePatrolState>();
   }
 
   /// Generate [MaterialColor] from a [Color]
@@ -121,28 +116,23 @@ class ThemePatrol extends StatefulWidget {
   }
 
   static Color _tintColor(Color color, double factor) {
-    return Color.fromRGBO(
-      _tintValue(color.red, factor),
-      _tintValue(color.green, factor),
-      _tintValue(color.blue, factor),
-      1
-    );
+    return Color.fromRGBO(_tintValue(color.red, factor),
+        _tintValue(color.green, factor), _tintValue(color.blue, factor), 1);
   }
 }
 
 class ThemePatrolState extends State<ThemePatrol> {
-
   /// The current theme data
-  ThemePatrolData theme;
+  ThemePatrolData? theme;
 
   /// The current light theme data, shortcut to [theme.light]
-  ThemeData get lightTheme => theme.light;
+  ThemeData? get lightTheme => theme?.light;
 
   /// The current dark theme data, shortcut to [theme.dark]
-  ThemeData get darkTheme => theme.dark;
+  ThemeData? get darkTheme => theme?.dark;
 
   /// The current theme mode, shortcut to [theme.mode]
-  ThemeMode get themeMode => theme.mode;
+  ThemeMode? get themeMode => theme?.mode;
 
   /// Whether the current theme mode is [ThemeMode.light] or not
   bool get isLightMode => themeMode == ThemeMode.light;
@@ -155,39 +145,38 @@ class ThemePatrolState extends State<ThemePatrol> {
 
   /// Set the current theme
   void setTheme({
-    ThemePatrolData data,
-    ThemeData light,
-    ThemeData dark,
-    ThemeMode mode,
+    ThemePatrolData? data,
+    ThemeData? light,
+    ThemeData? dark,
+    ThemeMode? mode,
   }) {
     setState(() {
-      theme = theme?.merge(data)?.copyWith(
-        light: light,
-        dark: dark,
-        mode: mode,
-      ) ?? data;
+      theme = theme?.merge(data).copyWith(
+                light: light,
+                dark: dark,
+                mode: mode,
+              ) ??
+          data;
     });
   }
 
   ///  the current theme
-  void setColor(Color primary, { Color accent }) {
+  void setColor(Color primary, {Color? accent}) {
     final MaterialColor swatch = ThemePatrol.createColorSwatch(primary);
     setTheme(
       light: ThemeData(
-        primarySwatch: swatch,
-        brightness: Brightness.light,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        useTextSelectionTheme: true
-      ),
+          primarySwatch: swatch,
+          brightness: Brightness.light,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useTextSelectionTheme: true),
       dark: ThemeData(
-        primarySwatch: swatch,
-        primaryColor: primary,
-        accentColor: accent ?? primary,
-        toggleableActiveColor: accent ?? swatch[600],
-        brightness: Brightness.dark,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        useTextSelectionTheme: true
-      ),
+          primarySwatch: swatch,
+          primaryColor: primary,
+          accentColor: accent ?? primary,
+          toggleableActiveColor: accent ?? swatch[600],
+          brightness: Brightness.dark,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useTextSelectionTheme: true),
     );
   }
 
