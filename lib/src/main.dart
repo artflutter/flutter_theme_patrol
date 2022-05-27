@@ -165,18 +165,18 @@ class ThemePatrolState extends State<ThemePatrol> {
     final MaterialColor swatch = ThemePatrol.createColorSwatch(primary);
     setTheme(
       light: ThemeData(
-          primarySwatch: swatch,
-          brightness: Brightness.light,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          useTextSelectionTheme: true),
+        primarySwatch: swatch,
+        brightness: Brightness.light,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       dark: ThemeData(
-          primarySwatch: swatch,
-          primaryColor: primary,
-          accentColor: accent ?? primary,
-          toggleableActiveColor: accent ?? swatch[600],
-          brightness: Brightness.dark,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          useTextSelectionTheme: true),
+        primarySwatch: swatch,
+        primaryColor: primary,
+        colorScheme: ColorScheme.dark(secondary: accent ?? primary),
+        toggleableActiveColor: accent ?? swatch[600],
+        brightness: Brightness.dark,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
     );
   }
 

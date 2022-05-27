@@ -1,4 +1,4 @@
-package com.widgetarian.flutter_theme_patrol_example
+package com.widgetarian.example
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -3,10 +3,12 @@ import 'package:theme_patrol2/theme_patrol2.dart';
 import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   // This widget is the root of your applicasetThemetion.
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
           theme: theme.light,
           darkTheme: theme.dark,
           themeMode: theme.mode,
-          home: MyHomePage(title: 'Flutter Demo Home Page'),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
         );
       },
     );
@@ -36,15 +38,15 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
